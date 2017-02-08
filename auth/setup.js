@@ -36,19 +36,25 @@ function findAndComparePassword(username, password, done) {
 
     if (user) {
       console.log('found a user with username', username);
-      if (user.password === password) {
-        console.log('Passwords matched');
-
-        // passing the user object here indicates to passport
-        // that the user passed our validation and should
-        // be logged in
-        return done(null, user);
-      }
+      user.comparePassword(password, function(err, match){
+        if (err) {
+          console.log('Error comparing password');
+          done(err);
+        } else {
+          if (match) {
+            console.log('Passwords matched');
+            done(null, user);
+          } else {
+            console.log('Passwords did not match');
+            done(null, false);
+          }
+        }
+      });
+    } else {
+      // false here means the user did not pass validation
+      // and should not be logged in
+      console.log('User was not found');
+      return done(null, false);
     }
-
-    // false here means the user did not pass validation
-    // and should not be logged in
-    console.log('Passwords did not match, or user was not found');
-    return done(null, false);
   });
 }
