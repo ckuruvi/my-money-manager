@@ -34,6 +34,10 @@ app.use(passport.session());
 app.use('/login', login);
 app.use('/register', register)
 
+app.get('/loginStatus', function(req, res){
+  res.send(req.isAuthenticated());
+})
+
 app.get('/*', function(req, res){
   res.sendFile(path.join(__dirname, 'public/views/index.html'));
 });
