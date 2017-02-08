@@ -13,7 +13,7 @@ function LoginController($http, $location) {
     }).then(function(response){
       console.log(response);
     }, function(error) {
-      console.log('error loggin in', error);
+      console.log('error logging in', error);
     });
   };
 }
