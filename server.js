@@ -31,12 +31,29 @@ app.use(express.static('public'));
 app.use(passport.initialize());
 app.use(passport.session());
 
+// no auth needed
 app.use('/login', login);
 app.use('/register', register)
-
 app.get('/loginStatus', function(req, res){
   res.send(req.isAuthenticated());
 })
+
+// the following routes require authentication
+app.use('/private', ensureAuthenticated);
+
+app.get('/private/secretInfo', function(req, res){
+  console.log('Sending secret info');
+  res.send('This is very secret!');
+});
+
+function ensureAuthenticated(req, res, next) {
+  console.log('Ensuring the user is authenticated');
+  if (req.isAuthenticated()) {
+    next();
+  } else {
+    res.sendStatus(401);
+  }
+}
 
 app.get('/*', function(req, res){
   res.sendFile(path.join(__dirname, 'public/views/index.html'));
