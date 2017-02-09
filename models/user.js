@@ -33,7 +33,7 @@ exports.findAndComparePassword = function(username, password) {
     return bcrypt
       .compare(password, user.password)
       .then(function(match) {
-        return match;
+        return { match: match, user: user };
       })
       .catch(function(err) {
         return false;
@@ -45,10 +45,12 @@ exports.create = function(username, password) {
   return bcrypt
     .hash(password, SALT_ROUNDS)
     .then(function(hash) {
-      return query("INSERT INTO users (username, password) VALUES ($1, $2)", [
-        username,
-        hash
-      ]);
+      return query(
+        "INSERT INTO users (username, password) VALUES ($1, $2) RETURNING *",
+        [ username, hash ]
+      ).then(function(users) {
+        return users[0];
+      });
     })
     .catch(function(err) {
       console.log("Error creating user", err);
@@ -67,7 +69,6 @@ exports.create = function(username, password) {
 // exports.findAndComparePassword("test", "12345").then(function(match) {
 //   console.log("Passwords match", match);
 // });
-
 // query("SELECT * FROM users")
 //   .then(function(result) {
 //     console.log(result.rows);
