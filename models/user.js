@@ -1,49 +1,99 @@
-const mongoose = require('mongoose');
-var bcrypt = require('bcrypt');
+var pool = require("../db/connection");
+var bcrypt = require("bcrypt");
 var SALT_ROUNDS = 10;
 
+// find by username
+exports.findByUsername = function(username) {
+  return query("SELECT * FROM users WHERE username = $1", [ username ])
+    .then(function(users) {
+      return users[0];
+    })
+    .catch(function(err) {
+      console.log("Error finding user by username", err);
+    });
+};
 
-const userSchema = new mongoose.Schema({
-  username: String,
-  password: String
-});
+// find by id
+exports.findById = function(id) {
+  return query("SELECT * FROM users WHERE id = $1", [ id ])
+    .then(function(users) {
+      return users[0];
+    })
+    .catch(function(err) {
+      console.log("Error finding user by id", err);
+    });
+};
 
-// ensure that each time a user is saved we hash the password first
-userSchema.pre('save', function(done){
-  var user = this;
-  console.log('Checking if password is modified');
-  if (user.isModified('password')){
-    console.log('password is modified');
-    bcrypt.hash(user.password, SALT_ROUNDS, function(err, hash){
-      if (err) {
-        console.log('Error hashing password', err);
-        done(err);
-      } else {
-        user.password = hash;
+// compare password
+// takes a username and a password, looks up the user by the given username
+// and returns promise which resolves to a boolean indicating whether the
+// passwords matched
+exports.findAndComparePassword = function(username, password) {
+  return exports.findByUsername(username).then(function(user) {
+    return bcrypt
+      .compare(password, user.password)
+      .then(function(match) {
+        return match;
+      })
+      .catch(function(err) {
+        return false;
+      });
+  });
+};
+
+exports.create = function(username, password) {
+  return bcrypt
+    .hash(password, SALT_ROUNDS)
+    .then(function(hash) {
+      return query("INSERT INTO users (username, password) VALUES ($1, $2)", [
+        username,
+        hash
+      ]);
+    })
+    .catch(function(err) {
+      console.log("Error creating user", err);
+    });
+};
+
+// exports.create('test', '1234').then(function() {
+//   console.log('Created a test user');
+// });
+// exports.findByUsername('test').then(function(user){
+//   console.log(user);
+// })
+// exports.findById('2').then(function(user){
+//   console.log(user);
+// });
+// exports.findAndComparePassword("test", "12345").then(function(match) {
+//   console.log("Passwords match", match);
+// });
+
+// query("SELECT * FROM users")
+//   .then(function(result) {
+//     console.log(result.rows);
+//   })
+//   .catch(function(err) {
+//     console.log("Error running test query", err);
+//   });
+function query(sqlString, data) {
+  return new Promise(function(resolve, reject) {
+    pool.connect(function(err, client, done) {
+      try {
+        if (err) {
+          return reject(err);
+        }
+
+        client.query(sqlString, data, function(err, result) {
+          if (err) {
+            return reject(err);
+          }
+
+          resolve(result.rows);
+        });
+      } finally {
         done();
-        console.log('Successfully hashed password');
       }
     });
-  } else {
-    console.log('password is not modified');
-    done();
-  }
-});
-
-userSchema.methods.comparePassword = function(password, done){
-  var user = this;
-
-  bcrypt.compare(password, user.password, function(err, match){
-    if (err) {
-      console.log('Error comparing password', err);
-      done(err);
-    } else {
-      done(null, match);
-    }
-  })
+  });
 }
-
-
-const User = mongoose.model('User', userSchema);
-
-module.exports = User;
+//
