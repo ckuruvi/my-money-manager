@@ -2,6 +2,7 @@ const router = require('express').Router();
 var passport = require('passport');
 
 router.post('/', passport.authenticate('local'), function(req, res){
+  console.log('inside login post router::');
   res.sendStatus(200);
 });
 
