@@ -1,3 +1,45 @@
-<h1>Home</h1>
 
-<button ng-click="home.logout()" >Logout</button>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+
+    <h1>Home</h1>
+    <div class="row text-center">
+      <div class="col-sm-1 ">
+        <a href="/home">Home</a>
+      </div>
+      <div class="col-sm-1">
+        <a href="/income">Income</a>
+      </div>
+      <div class="col-sm-1">
+        <a href="/expense">Expenses</a>
+      </div>
+      <div class="col-sm-2">
+        <a href="/investments">Investments</a>
+      </div>
+      <div class="col-sm-1">
+        <a href="/charts">Charts</a>
+      </div>
+    </div>
+
+
+    <button class="btn btn-info" ng-click="home.logout()" >Logout</button>
+
+    <!-- <button class="btn btn-info" ng-click="home.displayChart()" >Chart Display</button> -->
+<!--
+    <canvas id="base" class="chart-bar"
+      chart-data="home.data" chart-labels="home.labels" chart-colors="home.colors"
+      chart-dataset-override="home.datasetOverride" >
+    </canvas> -->
+
+    <canvas id="line" class="chart chart-line" chart-data="home.data"
+      chart-labels="home.labels" chart-series="home.series" chart-options="home.options"
+      chart-dataset-override="home.datasetOverride" chart-click="onClick">
+    </canvas>
+
+  </body>
+</html>

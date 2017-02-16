@@ -32,6 +32,7 @@ function findAndComparePassword(username, password, done) {
   User.findAndComparePassword(username, password).then(function(result){
     console.log('result', result);
     if (result.match) {
+      console.log("result.user ::",result.user);
       done(null, result.user);
     } else {
       done(null, false);

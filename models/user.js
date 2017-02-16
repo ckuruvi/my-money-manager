@@ -41,19 +41,72 @@ exports.findAndComparePassword = function(username, password) {
   });
 };
 
-exports.create = function(username, password) {
+exports.create = function(username, password, firstname, lastname) {
   return bcrypt
     .hash(password, SALT_ROUNDS)
     .then(function(hash) {
       return query(
-        "INSERT INTO users (username, password) VALUES ($1, $2) RETURNING *",
-        [ username, hash ]
+        "INSERT INTO users (username, password,first_name,last_name) VALUES ($1, $2, $3, $4) RETURNING *",
+        [ username, hash,firstname,lastname ]
       ).then(function(users) {
         return users[0];
       });
     })
     .catch(function(err) {
       console.log("Error creating user", err);
+    });
+};
+
+exports.getIncomeCategoryList=function(){
+  return query(
+    "SELECT * FROM  income_category; "
+  ).then(function(list) {
+    return list;
+  })
+.catch(function(err) {
+  console.log("Error getting Income category list", err);
+});
+}
+
+// create new income
+exports.createIncome=function(userid,category,amount,description,dateSelected){
+  return query(
+    "INSERT INTO user_income (user_id,income_category_id,income_amount,income_desc,income_date) "+
+    "VALUES ($1, $2, $3, $4,$5) RETURNING *",
+    [ userid,category,amount,description,dateSelected ]
+  ).then(function(income) {
+    return income[0];
+  })
+.catch(function(err) {
+  console.log("Error creating Income", err);
+});
+};
+
+
+//get income list
+exports.getIncomeList=function(userid){
+  return query(
+    "SELECT u.id,income_category_name,income_amount,income_desc,income_date FROM  user_income u inner join"+
+     " income_category c on u.income_category_id=c.id and u.user_id=$1 ; ",
+     [userid]
+  ).then(function(list) {
+    return list;
+  })
+.catch(function(err) {
+  console.log("Error getting Income List", err);
+});
+}
+
+// delete income
+exports.deleteIncome = function(id) {
+      return query(
+        "DELETE from user_income where id=$1 RETURNING *",
+        [ id ]
+      ).then(function(users) {
+        return users[0];
+      })
+    .catch(function(err) {
+      console.log("Error deleting  income", err);
     });
 };
 

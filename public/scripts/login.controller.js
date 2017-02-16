@@ -1,5 +1,5 @@
-angular.module('passportApp')
-.controller('LoginController', LoginController);
+//angular.module('passportApp')
+myApp.controller('LoginController', LoginController);
 
 function LoginController($http, $location) {
   console.log('LoginController loaded');
@@ -11,7 +11,7 @@ function LoginController($http, $location) {
       username: ctrl.username,
       password: ctrl.password
     }).then(function(response){
-      console.log(response);
+      console.log('response after authentication::',response);
       $location.path('/home');
     }, function(error) {
       console.log('error logging in', error);

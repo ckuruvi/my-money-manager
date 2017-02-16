@@ -1,4 +1,5 @@
-angular.module('passportApp').service('AuthService', function($http, $location){
+//angular.module('passportApp').service('AuthService', function($http, $location){
+myApp.service('AuthService', function($http, $location){
 
   this.checkLoginStatus = function(){
     console.log('Checking login status');
@@ -10,4 +11,5 @@ angular.module('passportApp').service('AuthService', function($http, $location){
       }
     });
   }
+
 });

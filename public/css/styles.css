@@ -1,1 +1,9 @@
 /* styles */
+body{
+  border: solid 1px;
+}
+
+canvas{
+  height:250px !important;
+  width:500px  !important ;
+}
