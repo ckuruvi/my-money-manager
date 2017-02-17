@@ -18,6 +18,9 @@
   <div class="col-sm-1">
     <a href="/charts">Charts</a>
   </div>
+  <div class="col-sm-2">
+    <button class="btn btn-info btn-xs" ng-click="income.logout()" >Logout</button>
+  </div>
 </div>
 
 
@@ -50,10 +53,10 @@ ng-submit="income.saveIncome(income.formdata)">
   </div>
   <div class="row ">
   <div class="col-sm-6">
-    <button type="submit" class="btn btn-primary" >Add Income</button>
+    <button type="submit" class="btn  btn-sm btn-primary" >Add Income</button>
   </div>
   <div class="col-sm-6">
-    <button type="submit" class="btn btn-primary" ng-click="income.reset()" >Cancel</button>
+    <button type="submit" class="btn btn-sm btn-primary" ng-click="income.reset()" >Cancel</button>
   </div>
   </div>
 </form>

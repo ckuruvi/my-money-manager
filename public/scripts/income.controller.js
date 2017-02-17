@@ -44,7 +44,14 @@ ctrl.reset=function(){
   console.log('inside reset ::');
 }
 
-
+ctrl.logout = function() {
+  $http.delete('/login').then(function(){
+    console.log('Successfully logged out!');
+    $location.path('/');
+  }).catch(function(err){
+    console.log('Error logging out');
+  });
+}
 
 //ctrl.categoryList=['salary','investments'];
 

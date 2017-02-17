@@ -5,7 +5,7 @@
     <a href="/home">Home</a>
   </div>
   <div class="col-sm-1">
-    <a href="/income">Income</a>
+    <a href="/expense">expense</a>
   </div>
   <div class="col-sm-1">
     <a href="/expense">Expenses</a>
@@ -16,4 +16,69 @@
   <div class="col-sm-1">
     <a href="/charts">Charts</a>
   </div>
+  <div class="col-sm-2">
+    <button class="btn btn-info btn-xs" ng-click="expense.logout()" >Logout</button>
+  </div>
 </div>
+
+
+<form  name="expenseForm" class="form-horizontal col-xs-12 col-md-6 col-md-offset-3 well"
+ng-submit="expense.saveExpense(expense.formdata)">
+  <div class="form-group row">
+    <label class="control-label col-xs-offset-1 col-xs-2">Category:</label>
+    <div class="col-xs-8">
+      <select class="form-control" ng-model="expense.formdata.category"
+      ng-options="x.id as x.expense_category_name for x in expense.categoryList"></select>
+    </div>
+  </div>
+  <label class="control-label col-xs-offset-1 col-xs-2">Description:</label>
+  <div class="col-xs-8">
+    <input class="form-control" type="text" ng-model="expense.formdata.description">
+  </div>
+</div>
+<label class="control-label col-xs-offset-1 col-xs-2">Amount:</label>
+<div class="col-xs-8">
+  <input class="form-control" type="number" ng-model="expense.formdata.amount">
+</div>
+</div>
+  <div class="form-group row">
+    <label class="control-label col-xs-offset-1 col-xs-2">Date:</label>
+    <div class="col-xs-8">
+      <input class="form-control" type="date" ng-model="expense.formdata.dateSelected">
+    </div>
+  </div>
+  <div class="row ">
+  <div class="col-sm-6">
+    <button type="submit" class="btn  btn-sm btn-primary" >Add expense</button>
+  </div>
+  <div class="col-sm-6">
+    <button type="submit" class="btn btn-sm btn-primary" ng-click="expense.reset()" >Cancel</button>
+  </div>
+  </div>
+</form>
+
+
+<div id="expenseHistory">
+    <h4>Expense History</h4>
+    <table  class="table table-striped text-center " id="table_id">
+      <thead>
+        <tr class="active">
+          <th class="text-center">Description</th>
+          <th class="text-center">Category</th>
+          <th class="text-center">Amount</th>
+          <th class="text-center">Date</th>
+          <th class="text-center">Delete</th>
+        </tr>
+      </thead>
+      <tbody id="text-center">
+        <tr ng-repeat=" obj in expense.expenselist">
+          <td>{{obj.expense_desc}}</td>
+          <td>{{obj.expense_category_name}}</td>
+          <td>{{obj.expense_amount}}</td>
+          <td>{{obj.expense_date|date:'MM-dd-yyyy'}}</td>
+          <td><button  class="btn btn-xs btn-info" ng-click="expense.deleteExpense(obj.id)"
+             type="submit" >Delete</button></td>
+        </tr>
+      </tBody>
+    </table>
+  </div>

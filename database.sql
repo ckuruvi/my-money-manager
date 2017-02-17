@@ -55,3 +55,6 @@ CREATE TABLE user_holding_price(
 
 INSERT INTO income_category(income_category_name)
 VALUES('Salary'),('Investments'),('Dividend'),('Interest Income'),('Rental Income'),('Bonus');
+
+INSERT INTO expense_category(expense_category_name)
+VALUES('Utilities'),('Healthcare'),('Food & Groceries'),('Personal Care'),('Consumer Debt'),('Entertainment');
