@@ -5,7 +5,7 @@
     <a href="/home">Home</a>
   </div>
   <div class="col-sm-1">
-    <a href="/expense">expense</a>
+    <a href="/income">Income</a>
   </div>
   <div class="col-sm-1">
     <a href="/expense">Expenses</a>
@@ -31,23 +31,26 @@ ng-submit="expense.saveExpense(expense.formdata)">
       ng-options="x.id as x.expense_category_name for x in expense.categoryList"></select>
     </div>
   </div>
+  <div class="form-group row">
   <label class="control-label col-xs-offset-1 col-xs-2">Description:</label>
   <div class="col-xs-8">
     <input class="form-control" type="text" ng-model="expense.formdata.description">
   </div>
 </div>
+<div class="form-group row">
 <label class="control-label col-xs-offset-1 col-xs-2">Amount:</label>
 <div class="col-xs-8">
   <input class="form-control" type="number" ng-model="expense.formdata.amount">
 </div>
 </div>
+
   <div class="form-group row">
     <label class="control-label col-xs-offset-1 col-xs-2">Date:</label>
     <div class="col-xs-8">
       <input class="form-control" type="date" ng-model="expense.formdata.dateSelected">
     </div>
   </div>
-  <div class="row ">
+  <div class="form-group row ">
   <div class="col-sm-6">
     <button type="submit" class="btn  btn-sm btn-primary" >Add expense</button>
   </div>

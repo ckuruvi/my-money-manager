@@ -35,11 +35,13 @@ ng-submit="income.saveIncome(income.formdata)">
       ng-options="x.id as x.income_category_name for x in income.categoryList"></select>
     </div>
   </div>
+  <div class="form-group row">
   <label class="control-label col-xs-offset-1 col-xs-2">Description:</label>
   <div class="col-xs-8">
     <input class="form-control" type="text" ng-model="income.formdata.description">
   </div>
 </div>
+<div class="form-group row">
 <label class="control-label col-xs-offset-1 col-xs-2">Amount:</label>
 <div class="col-xs-8">
   <input class="form-control" type="number" ng-model="income.formdata.amount">
@@ -51,7 +53,7 @@ ng-submit="income.saveIncome(income.formdata)">
       <input class="form-control" type="date" ng-model="income.formdata.dateSelected">
     </div>
   </div>
-  <div class="row ">
+  <div class="form-group row ">
   <div class="col-sm-6">
     <button type="submit" class="btn  btn-sm btn-primary" >Add Income</button>
   </div>

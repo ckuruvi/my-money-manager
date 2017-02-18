@@ -42,9 +42,12 @@ CREATE TABLE user_holding(
     ticker_symbol varchar(20),
     name  varchar(100),
     quantity integer,
+    purchase_date  date,
     purchase_price numeric(5,2),
-    current_price  numeric(5,2)
+    current_price  numeric(5,2),
+    current_profit numeric(5,2)
 );
+
 
 CREATE TABLE user_holding_price(
     id SERIAL PRIMARY KEY NOT NULL,

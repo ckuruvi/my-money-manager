@@ -27,7 +27,7 @@
       })
       .when("/investments", {
         templateUrl: "views/investments.html",
-        controller: "InvestmentsController as investments"
+        controller: "InvestmentsController as invest"
       })
       .when("/charts", {
         templateUrl: "views/charts.html",
