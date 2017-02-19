@@ -39,10 +39,38 @@
       chart-dataset-override="home.datasetOverride" >
     </canvas> -->
 
-    <canvas id="line" class="chart chart-line" chart-data="home.data"
+
+
+
+
+
+    <canvas id="line" class="chart chart-line center-block" chart-data="home.data"
       chart-labels="home.labels" chart-series="home.series" chart-options="home.options"
       chart-dataset-override="home.datasetOverride" chart-click="onClick">
     </canvas>
+
+
+    <div id="transactionHistory">
+        <h4>Last 5 Transaction History</h4>
+        <table  class="table table-striped text-center table-condensed " id="table_id">
+          <thead>
+            <tr class="active">
+              <th class="text-center">Name</th>
+              <th class="text-center">Type</th>
+              <th class="text-center">Amount</th>
+              <th class="text-center">Transaction Date</th>
+            </tr>
+          </thead>
+          <tbody id="text-center">
+            <tr ng-repeat=" obj in home.transactionlist">
+              <td>{{obj.desc}}</td>
+              <td>{{obj.type}}</td>
+              <td>{{obj.amount}}</td>
+              <td>{{obj.tran_date|date:'MM-dd-yyyy'}}</td>
+            </tr>
+          </tBody>
+        </table>
+      </div>
 
   </body>
 </html>

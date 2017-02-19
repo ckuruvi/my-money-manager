@@ -87,7 +87,7 @@ exports.createIncome=function(userid,category,amount,description,dateSelected){
 exports.getIncomeList=function(userid){
   return query(
     "SELECT u.id,income_category_name,income_amount,income_desc,income_date FROM  user_income u inner join"+
-     " income_category c on u.income_category_id=c.id and u.user_id=$1 ; ",
+     " income_category c on u.income_category_id=c.id and u.user_id=$1 order by income_date desc; ",
      [userid]
   ).then(function(list) {
     return list;

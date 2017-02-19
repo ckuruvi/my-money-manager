@@ -1,5 +1,5 @@
 //angular.module('passportApp').controller('HomeController', function($http, $location){
-myApp.controller('HomeController', function($http, $location){
+myApp.controller('HomeController', function($http, $location,HomeService){
 
   console.log('inside HomeController');
   var ctrl=this;
@@ -37,32 +37,58 @@ myApp.controller('HomeController', function($http, $location){
 //     ];
 // }
 
-ctrl.displayChart=function(){
+ctrl.chartData=function(){
 
-  ctrl.labels = ["January", "February", "March", "April", "May", "June", "July"];
-  ctrl.series = ['Series A', 'Series B'];
-  ctrl.data = [
-    [65, 59, 80, 81, 56, 55, 40],
-    [28, 48, 40, 19, 86, 27, 90]
-  ];
-  ctrl.onClick = function (points, evt) {
-    console.log(points, evt);
-  };
-//  ctrl.datasetOverride = [{ yAxisID: 'y-axis-1' }, { yAxisID: 'y-axis-2' }];
-  ctrl.options = {
-    scales: {
-      yAxes: [
-        {
-          id: 'y-axis-1',
-          type: 'linear',
-          display: true,
-          position: 'left'
-        }
-      ]
-    }
-  };
+  HomeService.getChartData().then(function(chartList){
+    console.log(chartList);
+    var labels=[],income=[],expense=[];
+    chartList.forEach(function(obj){
+      labels.push(obj.month);
+      expense.push(obj.expense);
+      income.push(obj.income);
+    });
+    ctrl.labels=labels;
+    ctrl.data=[income,expense];
+    ctrl.series = ['Income', 'Expense'];
+    //console.log(labels,income,expense);
+  });
 }
 
-ctrl.displayChart();
+ctrl.transactionList=function(){
+ console.log('inside transcationList function');
+  HomeService.getTransactionList().then(function(list){
+
+    ctrl.transactionlist=list;
+  });
+}
+
+ctrl.displayChart=function(){
+
+  //ctrl.labels = ["January", "February", "March", "April", "May", "June", "July"];
+//  ctrl.series = ['Series A', 'Series B'];
+  // ctrl.data = [
+  //   [65, 59, 80, 81, 56, 55, 40],
+  //   [28, 48, 40, 19, 86, 27, 90]
+  // ];
+  // ctrl.onClick = function (points, evt) {
+  //   console.log(points, evt);
+  // };
+//  ctrl.datasetOverride = [{ yAxisID: 'y-axis-1' }, { yAxisID: 'y-axis-2' }];
+  // ctrl.options = {
+  //   scales: {
+  //     yAxes: [
+  //       {
+  //         id: 'y-axis-1',
+  //         type: 'linear',
+  //         display: true,
+  //         position: 'left'
+  //       }
+  //     ]
+  //   }
+  // };
+}
+ctrl.chartData();
+ctrl.transactionList();
+//ctrl.displayChart();
 
 });

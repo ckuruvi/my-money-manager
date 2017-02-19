@@ -39,7 +39,7 @@ ctrl.sellInvestment=function(old_quantity,tddata){
    tddata.old_quantity=old_quantity;
  console.log('inside sellInvestment',tddata);
  InvestmentService.setSellInvestment(tddata).then(function(){
-  // ctrl.investmentList();
+  ctrl.investmentList();
  });
 } // end of sellInvestment
 

@@ -77,7 +77,7 @@ ng-submit="invest.saveInvestment(invest.formdata)">
 
 <div id="expenseHistory">
     <h4>Investment History</h4>
-    <table  class="table table-striped text-center " id="table_id">
+    <table  class="table table-striped text-center table-condensed " id="table_id">
       <thead>
         <tr class="active">
           <th class="text-center">Name</th>
@@ -93,7 +93,7 @@ ng-submit="invest.saveInvestment(invest.formdata)">
         <tr ng-repeat=" obj in invest.investmentlist">
           <td>{{obj.name}}</td>
           <!-- <td>{{obj.quantity}}</td> -->
-          <td><input type="number"  ng-init="old_quantity=obj.quantity" ng-model="obj.quantity"></td>
+          <td><input class="input-xs" type="number"  ng-init="old_quantity=obj.quantity" ng-model="obj.quantity"></td>
           <td>{{obj.purchase_price}}</td>
           <td>{{obj.purchase_date|date:'MM-dd-yyyy'}}</td>
           <td>{{obj.current_price}}</td>

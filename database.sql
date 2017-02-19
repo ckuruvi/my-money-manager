@@ -61,3 +61,9 @@ VALUES('Salary'),('Investments'),('Dividend'),('Interest Income'),('Rental Incom
 
 INSERT INTO expense_category(expense_category_name)
 VALUES('Utilities'),('Healthcare'),('Food & Groceries'),('Personal Care'),('Consumer Debt'),('Entertainment');
+
+SELECT 	to_char(income_date,'Mon') AS month,
+		    to_char(income_date,'YY') AS year,
+   		  SUM(income_amount) AS amount
+from 	user_income
+group by 2,1 order by 2 asc,1 desc limit 6;

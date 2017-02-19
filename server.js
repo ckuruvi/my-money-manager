@@ -10,6 +10,7 @@ var register = require('./routes/register');
 var income = require('./routes/income');
 var expense = require('./routes/expense');
 var investments = require('./routes/investments');
+var home = require('./routes/home');
 
 require('./auth/setup');
 
@@ -40,6 +41,7 @@ app.use('/register', register);
 app.use('/income', income);
 app.use('/expense', expense);
 app.use('/investments', investments);
+app.use('/home', home);
 
 app.get('/loginStatus', function(req, res){
   res.send(req.isAuthenticated());
