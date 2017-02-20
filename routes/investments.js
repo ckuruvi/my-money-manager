@@ -3,18 +3,20 @@ var Investments = require('../models/investments');
 var User = require('../models/user');
 var googleFinance = require('google-finance');
 var INCOME_CATEGORY=2;
-router.get('/searchticker/:id',function(req,res){
-console.log('inside route get ',req.params.id);
+
+
+router.get('/searchticker/',function(req,res){
+console.log('inside route get ',req.query.date,req.query.ticker);
   googleFinance.historical({
-                symbol: req.params.id,
-                from: '2017-02-16'
+                symbol: req.query.ticker,
+                from: req.query.date
+                //from: '2017-02-17'
                 //to: '2017-12-13'
               }, function (err, quotes) {
                 console.log(quotes);
                 res.send(quotes);
               });
         });
-
 
 // create new investment
 router.post('/', function(req, res){

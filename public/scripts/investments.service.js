@@ -2,7 +2,8 @@ myApp.service('InvestmentService', function($http){
 
 this.getSearchTicker=function(tickersymbol){
   console.log('Inside getSearchTicker',tickersymbol);
-  return $http.get("/investments/searchticker/"+tickersymbol).then(function(response){
+  var getDate=getLastTradeDate();
+  return $http.get("/investments/searchticker/",{params:{ date:getDate,ticker:tickersymbol}}).then(function(response){
     console.log('getSearchTicker call successful',response.data);
     return response.data;
   }).catch(function(err){
@@ -34,5 +35,26 @@ this.setSellInvestment=function(data){
   console.log("Error deleting  investment from list",err);
 });
 } // end of setSellInvestment
+
+function getLastTradeDate(){
+  var dt=new Date();
+  var month=dt.getMonth()+1;
+  if(month.length=1){
+    month='0'+month;
+  }
+  var year=dt.getFullYear();
+  var date=dt.getDate();
+  var dayOfWeek=dt.getDay();
+  if(dayOfWeek==1){
+    date=date-3;
+  }else if(dayOfWeek==0){
+    date=date-2;
+  }else {
+    date=date-1;
+  }
+  console.log("*****",date);
+  console.log('date****',year+'-'+month+'-'+date);
+  return year+'-'+month+'-'+date;
+}
 
 });

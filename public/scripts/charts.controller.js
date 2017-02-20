@@ -5,6 +5,17 @@ console.log("ChartsController Loaded");
 
   //this.labels = ["Download Sales", "In-Store Sales", "Mail-Order Sales"];
   //this.data = [300, 500, 100];
+
+  ctrl.logout = function() {
+    $http.delete('/login').then(function(){
+      console.log('Successfully logged out!');
+      $location.path('/');
+    }).catch(function(err){
+      console.log('Error logging out');
+    });
+  }
+
+
    ctrl.monthYearList=function(){
 
 ChartsService.getMonthYearList().then(function(list){

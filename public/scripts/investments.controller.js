@@ -3,10 +3,23 @@ console.log("InvestmentsController Loaded");
 
 var ctrl=this;
 
+
 ctrl.optionList=[{value:'Buy'},{value:'Sell'}];
+
+ctrl.logout = function() {
+  $http.delete('/login').then(function(){
+    console.log('Successfully logged out!');
+    $location.path('/');
+  }).catch(function(err){
+    console.log('Error logging out');
+  });
+}
 
 ctrl.searchTicker=function(tickersymbol){
  console.log('inside searchTicker',tickersymbol);
+ //'2017-02-16'
+ // var dt=new Date();
+ // console.log('date',dt.getDate(),dt.getMonth()+1,dt.getFullYear(),dt.getDay());
  InvestmentService.getSearchTicker(tickersymbol).then(function(data){
   console.log('response from ticker search',data);
   ctrl.formdata.ticker=data[0].symbol;

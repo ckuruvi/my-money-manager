@@ -7,3 +7,10 @@ canvas{
   height:250px !important;
   width:500px  !important ;
 }
+
+#expenseHistory{ width:700px;}
+#incomeHistory{ width:700px;}
+#expenseHistory{ width:700px;}
+#transactionHistory{ width:700px;}
+.bodycontainer { max-height: 300px; width: 100%; margin: 0; overflow-y: auto; }
+.table-scrollable { margin: 0; padding: 0; }

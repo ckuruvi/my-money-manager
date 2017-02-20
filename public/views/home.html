@@ -50,7 +50,7 @@
     </canvas>
 
 
-    <div id="transactionHistory">
+    <div id="transactionHistory" class="center-block" class="table-responsive">
         <h4>Last 5 Transaction History</h4>
         <table  class="table table-striped text-center table-condensed " id="table_id">
           <thead>
@@ -61,7 +61,10 @@
               <th class="text-center">Transaction Date</th>
             </tr>
           </thead>
-          <tbody id="text-center">
+        </table>
+        <div class="bodycontainer scrollable">
+        <table class="table table-striped table-condensed table-scrollable text-center">
+          <tbody>
             <tr ng-repeat=" obj in home.transactionlist">
               <td>{{obj.desc}}</td>
               <td>{{obj.type}}</td>
