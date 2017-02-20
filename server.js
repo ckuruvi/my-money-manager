@@ -11,6 +11,7 @@ var income = require('./routes/income');
 var expense = require('./routes/expense');
 var investments = require('./routes/investments');
 var home = require('./routes/home');
+var charts = require('./routes/charts');
 
 require('./auth/setup');
 
@@ -42,6 +43,7 @@ app.use('/income', income);
 app.use('/expense', expense);
 app.use('/investments', investments);
 app.use('/home', home);
+app.use('/charts', charts);
 
 app.get('/loginStatus', function(req, res){
   res.send(req.isAuthenticated());
