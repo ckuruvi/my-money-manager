@@ -44,8 +44,11 @@ router.get('/',function(req,res){
 
 
 router.put('/',function(req,res){
-  console.log(req.user.id, req.body,new Date());
-    var income=req.body.quantity * req.body.current_price;
+  //console.log(req.user.id, req.body,new Date());
+    var salePriceAmt=req.body.quantity * req.body.current_price;
+    var purchasePriceAmt=req.body.quantity * req.body.purchase_price;
+    var income=Number(salePriceAmt-purchasePriceAmt).toFixed(2);
+    console.log("calculation of income",salePriceAmt,purchasePriceAmt,income);
       //userid,category,amount,description,dateSelected
       User.createIncome(req.user.id,INCOME_CATEGORY,income,req.body.name,new Date()).then(function(){
         if(req.body.quantity==req.body.old_quantity){
@@ -53,7 +56,10 @@ router.put('/',function(req,res){
             res.sendStatus(204);
           })
         }else {
-          Investments.updateInvestment(req.body.id,req.body.old_quantity-req.body.quantity).then(function(){
+          var updatedQuantity=req.body.old_quantity-req.body.quantity;
+          var updatedProfit=Number(updatedQuantity *(req.body.current_price-req.body.purchase_price)).toFixed(2);
+          console.log("inside update call",req.body.id,updatedQuantity,updatedProfit);
+          Investments.updateInvestment(req.body.id,updatedQuantity,updatedProfit).then(function(){
             res.sendStatus(204);
           })
         }
@@ -69,27 +75,39 @@ router.put('/updateprice',function(req,res){
 
    Investments.getinvestmentList(req.user.id).then(function(investmentList){
      console.log('investmentList',investmentList);
-     var date=getLastTradeDate();
-     investmentList.forEach(function(obj){
-      getPriceByTicker(obj.ticker_symbol,date).then(function(tickerPrice){
-        //console.log('*#######*',tickerPrice);
-        var purchaseAmt=obj.quantity * parseInt(obj.purchase_price);
-        //console.log("purchaseAmt",purchaseAmt,tickerPrice[0].close);
-        var currentAmt=obj.quantity * tickerPrice[0].close;
-        //console.log("purchaseAmt & currentAmt ::",purchaseAmt,currentAmt);
-        var profit=currentAmt - purchaseAmt;
-        Investments.setUpdatePrice(obj.id,tickerPrice[0].close,profit);
-
-      });
-      console.log("&&&&&&");
-     });
-     console.log("XXXXXX");
-     res.sendStatus(204);
+    updatePrice(investmentList).then(function(response){
+      console.log('updatePrice successful');
+      res.sendStatus(204);
+    });
    }).catch(function(err){
       console.log('Error fetching  investmentList');
      res.sendStatus(500);
     });
 });
+
+function updatePrice(list) {
+  return new Promise(function(resolve, reject) {
+    var date=getLastTradeDate();
+    var count=0;
+    list.forEach(function(obj){
+     getPriceByTicker(obj.ticker_symbol,date).then(function(tickerPrice){
+       console.log('*tickerPrice*',tickerPrice);
+       if(tickerPrice.length<0){
+       var purchaseAmt=obj.quantity * parseInt(obj.purchase_price);
+       console.log("purchaseAmt",purchaseAmt,tickerPrice[0].close);
+       var currentAmt=obj.quantity * tickerPrice[0].close;
+       //console.log("purchaseAmt & currentAmt ::",purchaseAmt,currentAmt);
+       var profit=currentAmt - purchaseAmt;
+       Investments.setUpdatePrice(obj.id,tickerPrice[0].close,profit);
+       }
+       count++;
+       console.log("***count***",count);
+       if(list.length<=count){resolve();}
+     });
+    });
+
+  });
+}  // end of updatePrice function
 
 
 function getLastTradeDate(){
@@ -113,10 +131,12 @@ function getLastTradeDate(){
 
 
 function getPriceByTicker(ticker,date){
+    console.log("getPriceByTicker call",ticker,date);
      return googleFinance.historical({
           symbol: ticker,
           from: date
         }).then( function (quotes) {
+          console.log('response from api call',quotes);
               return quotes;
         });
 }

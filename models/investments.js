@@ -30,10 +30,11 @@ exports.createInvestment=function(userid,ticker,name,quantity,pruchaseprice,curr
 };
 
 // undate investment
-exports.updateInvestment = function(id,quantity) {
+exports.updateInvestment = function(id,quantity,profit) {
+        console.log("inside model updateInvestment ",id,quantity,profit);
       return query(
-        "UPDATE user_holding SET quantity=$2 WHERE id=$1 RETURNING *",
-        [ id,quantity ]
+        "UPDATE user_holding SET quantity=$2,current_profit=$3 WHERE id=$1 RETURNING *",
+        [ id,quantity,profit ]
       ).then(function(holding) {
         return holding[0];
       })
