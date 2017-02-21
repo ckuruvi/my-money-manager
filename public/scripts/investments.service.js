@@ -36,6 +36,16 @@ this.setSellInvestment=function(data){
 });
 } // end of setSellInvestment
 
+
+
+this.setUpdatePrice=function(){
+  console.log('Inside setUpdatePrice');
+  return $http.put("/investments/updateprice").catch(function(err){
+  console.log("Error deleting  investment from list",err);
+});
+} // end of setUpdatePrice
+
+
 function getLastTradeDate(){
   var dt=new Date();
   var month=dt.getMonth()+1;

@@ -6,17 +6,14 @@ var INCOME_CATEGORY=2;
 
 
 router.get('/searchticker/',function(req,res){
-console.log('inside route get ',req.query.date,req.query.ticker);
-  googleFinance.historical({
-                symbol: req.query.ticker,
-                from: req.query.date
-                //from: '2017-02-17'
-                //to: '2017-12-13'
-              }, function (err, quotes) {
-                console.log(quotes);
-                res.send(quotes);
-              });
-        });
+//console.log('inside route get ',req.query.date,req.query.ticker);
+          getPriceByTicker(req.query.ticker,req.query.date).then(function(quotes){
+            res.send(quotes);
+          });
+});
+
+
+
 
 // create new investment
 router.post('/', function(req, res){
@@ -44,6 +41,8 @@ router.get('/',function(req,res){
     });
 });
 
+
+
 router.put('/',function(req,res){
   console.log(req.user.id, req.body,new Date());
     var income=req.body.quantity * req.body.current_price;
@@ -63,5 +62,64 @@ router.put('/',function(req,res){
          res.sendStatus(500);
       });
 });
+
+
+
+router.put('/updateprice',function(req,res){
+
+   Investments.getinvestmentList(req.user.id).then(function(investmentList){
+     console.log('investmentList',investmentList);
+     var date=getLastTradeDate();
+     investmentList.forEach(function(obj){
+      getPriceByTicker(obj.ticker_symbol,date).then(function(tickerPrice){
+        //console.log('*#######*',tickerPrice);
+        var purchaseAmt=obj.quantity * parseInt(obj.purchase_price);
+        //console.log("purchaseAmt",purchaseAmt,tickerPrice[0].close);
+        var currentAmt=obj.quantity * tickerPrice[0].close;
+        //console.log("purchaseAmt & currentAmt ::",purchaseAmt,currentAmt);
+        var profit=currentAmt - purchaseAmt;
+        Investments.setUpdatePrice(obj.id,tickerPrice[0].close,profit);
+
+      });
+      console.log("&&&&&&");
+     });
+     console.log("XXXXXX");
+     res.sendStatus(204);
+   }).catch(function(err){
+      console.log('Error fetching  investmentList');
+     res.sendStatus(500);
+    });
+});
+
+
+function getLastTradeDate(){
+  var dt=new Date();
+  var month=dt.getMonth()+1;
+  if(month.length=1){
+    month='0'+month;
+  }
+  var year=dt.getFullYear();
+  var date=dt.getDate();
+  var dayOfWeek=dt.getDay();
+  if(dayOfWeek==1){
+    date=date-3;
+  }else if(dayOfWeek==0){
+    date=date-2;
+  }else {
+    date=date-1;
+  }
+  return year+'-'+month+'-'+date;
+}
+
+
+function getPriceByTicker(ticker,date){
+     return googleFinance.historical({
+          symbol: ticker,
+          from: date
+        }).then( function (quotes) {
+              return quotes;
+        });
+}
+
 
 module.exports = router;

@@ -56,4 +56,13 @@ ctrl.sellInvestment=function(old_quantity,tddata){
  });
 } // end of sellInvestment
 
+
+ctrl.updatePrice=function(){
+ console.log('inside updatePrice');
+ InvestmentService.setUpdatePrice().then(function(){
+  ctrl.investmentList();
+ });
+} // end of updatePrice
+
+
 });

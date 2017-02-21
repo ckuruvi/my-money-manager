@@ -55,6 +55,22 @@ exports.deleteInvestment = function(id) {
     });
 };
 
+
+
+// undate current price & profit
+exports.setUpdatePrice = function(id,price,profit) {
+      return query(
+        "UPDATE user_holding SET current_price=$2,current_profit=$3 WHERE id=$1 RETURNING *",
+        [ id,price,profit]
+      ).then(function(holding) {
+        return holding[0];
+      })
+    .catch(function(err) {
+      console.log("Error updating investment", err);
+    });
+};
+
+
 function query(sqlString, data) {
   return new Promise(function(resolve, reject) {
     pool.connect(function(err, client, done) {

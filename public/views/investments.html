@@ -1,5 +1,4 @@
 <h2>investments</h2>
-
 <div class="row text-center">
   <div class="col-sm-1 ">
     <a href="/home">Home</a>
@@ -20,7 +19,6 @@
     <button class="btn btn-info btn-xs" ng-click="invest.logout()" >Logout</button>
   </div>
 </div>
-
 
 <form  name="investForm" class="form-horizontal col-xs-12 col-md-6 col-md-offset-3 well">
   <div class="form-group row">
@@ -98,7 +96,9 @@
         <tr ng-repeat=" obj in invest.investmentlist">
           <td>{{obj.name}}</td>
           <!-- <td>{{obj.quantity}}</td> -->
-          <td><input class="input-xs" type="number"  ng-init="old_quantity=obj.quantity" ng-model="obj.quantity"></td>
+          <td>
+            <input class="input-xs" type="number" style="width:40px" ng-init="old_quantity=obj.quantity" ng-model="obj.quantity">
+          </td>
           <td>{{obj.purchase_price}}</td>
           <td>{{obj.purchase_date|date:'MM-dd-yyyy'}}</td>
           <td>{{obj.current_price}}</td>
@@ -108,4 +108,8 @@
         </tr>
       </tBody>
     </table>
+  </div>
+  <div class="row">
+    <button type="submit" class="btn btn-sm btn-primary" ng-click="invest.updatePrice()" >Update Price</button>
+
   </div>
