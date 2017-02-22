@@ -61,6 +61,7 @@ exports.getInvestmentData=function(userid,month,year){
      "group by 2,1;",
      [userid,month,year]
   ).then(function(list) {
+    console.log("return investmetn data form month",list);
     return list;
   })
 .catch(function(err) {

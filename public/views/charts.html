@@ -27,7 +27,7 @@ ng-submit="charts.chartData()">
   <div class="form-group row">
     <label class="control-label col-xs-offset-1 col-xs-2">Transaction Period:</label>
     <div class="col-xs-8">
-      <select class="form-control" ng-model="charts.monthyear"
+      <select class="form-control" ng-model="charts.monthyear" ng-init="charts.monthYearlist[0].month "
       ng-options="{month:x.month,year:x.year} as (x.month+','+x.year) for x in charts.monthYearlist"></select>
     </div>
   </div>
@@ -39,7 +39,7 @@ ng-submit="charts.chartData()">
 </form>
 
 
-<canvas id="doughnut" class="chart chart-doughnut center-block"
+<canvas id="doughnut" class="chart chart-doughnut center-block" chart-options="charts.options"
   chart-data="charts.data" chart-labels="charts.labels">
 </canvas>
 

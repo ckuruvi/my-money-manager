@@ -67,3 +67,15 @@ SELECT 	to_char(income_date,'Mon') AS month,
    		  SUM(income_amount) AS amount
 from 	user_income
 group by 2,1 order by 2 asc,1 desc limit 6;
+
+
+
+
+-- Json Data from https://www.quandl.com/api/v3/datasets/WIKI/AAPL/data.json?api_key=sK64LyybZ5dz3sg37-Ac&start_date=2017-02-21
+{"dataset_data":
+{"limit":null,"transform":null,"column_index":null,
+"column_names":["Date","Open","High","Low","Close","Volume","Ex-Dividend","Split Ratio","Adj. Open","Adj. High","Adj. Low","Adj. Close","Adj. Volume"],
+"start_date":"2017-02-21",
+"end_date":"2017-02-21",
+"frequency":"daily",
+"data":[["2017-02-21",30.41,30.59,30.34,30.52,25701371.0,0.0,1.0,30.41,30.59,30.34,30.52,25701371.0]],"collapse":null,"order":null}}

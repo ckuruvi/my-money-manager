@@ -27,8 +27,11 @@ router.post('/',function(req,res){
       chartData.expense=expenseData[0].expense;
 
       Charts.getInvestmentData(req.user.id,req.body.month,req.body.year).then(function(investmentData){
-
-        chartData.investment=investmentData[0].investment;
+        if(investmentData.length>0){
+        chartData.investment=investmentData[0].investment ;
+        }else{
+        chartData.investment=0;
+        }
         res.send(chartData);
       });
     });

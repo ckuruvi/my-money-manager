@@ -2,6 +2,8 @@ var router = require('express').Router();
 var Investments = require('../models/investments');
 var User = require('../models/user');
 var googleFinance = require('google-finance');
+//var request = require('request');
+var rp = require('request-promise');
 var INCOME_CATEGORY=2;
 
 
@@ -92,13 +94,17 @@ function updatePrice(list) {
     list.forEach(function(obj){
      getPriceByTicker(obj.ticker_symbol,date).then(function(tickerPrice){
        console.log('*tickerPrice*',tickerPrice);
-       if(tickerPrice.length<0){
+       console.log("jason parsed ",JSON.parse(tickerPrice).dataset_data.data);
+       var tickerData=JSON.parse(tickerPrice).dataset_data.data;
+      //console.log('*datalength*',JSON.parse(tickerPrice).dataset_data.data.length);
+       if(tickerData.length>0){
+      //  if(tickerPrice.dataset_data.data.length<0){
        var purchaseAmt=obj.quantity * parseInt(obj.purchase_price);
-       console.log("purchaseAmt",purchaseAmt,tickerPrice[0].close);
-       var currentAmt=obj.quantity * tickerPrice[0].close;
+       console.log("purchaseAmt",purchaseAmt,tickerData[0][4]);
+       var currentAmt=obj.quantity * tickerData[0][4];
        //console.log("purchaseAmt & currentAmt ::",purchaseAmt,currentAmt);
        var profit=currentAmt - purchaseAmt;
-       Investments.setUpdatePrice(obj.id,tickerPrice[0].close,profit);
+       Investments.setUpdatePrice(obj.id,tickerData[0][4],profit);
        }
        count++;
        console.log("***count***",count);
@@ -130,16 +136,26 @@ function getLastTradeDate(){
 }
 
 
+// function getPriceByTicker(ticker,date){
+//     console.log("getPriceByTicker call",ticker,date);
+//      return googleFinance.historical({
+//           symbol: ticker,
+//           from: date
+//         }).then( function (quotes) {
+//           console.log('response from api call',quotes);
+//               return quotes;
+//         });
+// }
+
 function getPriceByTicker(ticker,date){
-    console.log("getPriceByTicker call",ticker,date);
-     return googleFinance.historical({
-          symbol: ticker,
-          from: date
-        }).then( function (quotes) {
-          console.log('response from api call',quotes);
-              return quotes;
-        });
-}
+  return rp('https://www.quandl.com/api/v3/datasets/WIKI/'+ticker+'/data.json?api_key=sK64LyybZ5dz3sg37-Ac&start_date='+date)
+      .then(function (quotes) {
+        console.log('response from api call',quotes);
+         return quotes;
+      }).catch(function(err){
+        console.log("error getting quote",err);
+      });
+};
 
 
 module.exports = router;

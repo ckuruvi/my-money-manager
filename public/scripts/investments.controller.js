@@ -22,11 +22,14 @@ ctrl.searchTicker=function(tickersymbol){
  // console.log('date',dt.getDate(),dt.getMonth()+1,dt.getFullYear(),dt.getDay());
  InvestmentService.getSearchTicker(tickersymbol).then(function(data){
   console.log('response from ticker search',data);
-  if(data.length>0){ // check if data exists from api call
-  ctrl.formdata.ticker=data[0].symbol;
-  ctrl.formdata.price=data[0].close;
-  }
+
+  // ctrl.formdata.ticker=data[0].symbol;
+  // ctrl.formdata.price=data[0].close;
+  ctrl.formdata.price=data;
+
  });
+
+ //InvestmentService.getStockQuote();
 }; // end of searchTicker
 
 

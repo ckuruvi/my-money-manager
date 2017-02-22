@@ -37,6 +37,7 @@ myApp.controller('HomeController', function($http, $location,HomeService){
 //     ];
 // }
 
+
 ctrl.chartData=function(){
 
   HomeService.getChartData().then(function(chartList){
@@ -50,6 +51,7 @@ ctrl.chartData=function(){
     ctrl.labels=labels;
     ctrl.data=[income,expense];
     ctrl.series = ['Income', 'Expense'];
+    ctrl.options={ legend: { display: true } };
     //console.log(labels,income,expense);
   });
 }

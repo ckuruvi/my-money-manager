@@ -1,15 +1,29 @@
 myApp.service('InvestmentService', function($http){
 
+// function works with google-finance
+// this.getSearchTicker=function(tickersymbol){
+//   console.log('Inside getSearchTicker',tickersymbol);
+//   var getDate=getLastTradeDate();
+//   return $http.get("/investments/searchticker/",{params:{ date:getDate,ticker:tickersymbol}}).then(function(response){
+//     console.log('getSearchTicker call successful',response.data);
+//     return response.data;
+//   }).catch(function(err){
+//   console.log("Error from API call for ticker price",err);
+// });
+// } // end of getSearchTicker
+
+
 this.getSearchTicker=function(tickersymbol){
   console.log('Inside getSearchTicker',tickersymbol);
   var getDate=getLastTradeDate();
   return $http.get("/investments/searchticker/",{params:{ date:getDate,ticker:tickersymbol}}).then(function(response){
     console.log('getSearchTicker call successful',response.data);
-    return response.data;
+    return response.data.dataset_data.data[0][4];
   }).catch(function(err){
   console.log("Error from API call for ticker price",err);
 });
 } // end of getSearchTicker
+
 
 this.saveInvestmentData = function(formdata){
   console.log('Inside saveInvestmentData',formdata);
@@ -66,5 +80,13 @@ function getLastTradeDate(){
   console.log('date****',year+'-'+month+'-'+date);
   return year+'-'+month+'-'+date;
 }
+
+// this.getStockQuote=function(){
+//   return $http.get('https://www.quandl.com/api/v3/datasets/WIKI/AAPL/data.json?api_key=sK64LyybZ5dz3sg37-Ac&start_date=2017-02-21').then(function(res){
+//     console.log('respnse data',res);
+//   }).catch(function(err){
+//     console.log("error getting data",err);
+//   })
+// }
 
 });
