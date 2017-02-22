@@ -5,9 +5,9 @@ var Home = require('../models/home');
 var incomeList=[];
 
 router.get('/',function(req,res){
-   Home.getIncomeList().then(function(list){
+   Home.getIncomeList(req.user.id).then(function(list){
    incomeList=list;
-   Home.getExpenseList().then(function(expenseList){
+   Home.getExpenseList(req.user.id).then(function(expenseList){
    expenseList.forEach(function(expenseObj){
       incomeList.find(function(incomeObj){
         if(expenseObj.month==incomeObj.month){
@@ -25,7 +25,7 @@ router.get('/',function(req,res){
 
 
 router.get('/transactions',function(req,res){
-   Home.getTransactionList().then(function(transactionslist){
+   Home.getTransactionList(req.user.id).then(function(transactionslist){
     res.send(transactionslist);
   }).catch(function(err){
       console.log('Error fetching  transactions list');
