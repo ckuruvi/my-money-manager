@@ -54,18 +54,23 @@ ng-submit="income.saveIncome(income.formdata)">
     </div>
   </div>
   <div class="form-group row ">
-  <div class="col-sm-6">
+  <div class="col-sm-4 col-sm-offset-3">
     <button type="submit" class="btn  btn-sm btn-primary" >Add Income</button>
   </div>
-  <div class="col-sm-6">
+  <div class="col-sm-3 center-block">
     <button type="submit" class="btn btn-sm btn-primary" ng-click="income.reset()" >Cancel</button>
   </div>
   </div>
 </form>
 
 
-<div id="incomeHistory" class="center-block" class="table-responsive">
+<div id="incomeHistory" class="center-block text-center" class="table-responsive">
+
+  <div class="row">
+      <div class="col-sm-6 col-sm-offset-3">
     <h4>Income History</h4>
+  </div>
+</div>
     <table  class="table table-striped text-center " id="table_id">
       <thead>
         <tr class="active">

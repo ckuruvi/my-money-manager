@@ -12,5 +12,6 @@ canvas{
 #incomeHistory{ width:700px;}
 #expenseHistory{ width:700px;}
 #transactionHistory{ width:700px;}
+#chartdetails{width:700px;}
 .bodycontainer { max-height: 300px; width: 100%; margin: 0; overflow-y: auto; }
 .table-scrollable { margin: 0; padding: 0; }

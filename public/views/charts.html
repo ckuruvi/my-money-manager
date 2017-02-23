@@ -13,7 +13,7 @@
   <div class="col-sm-2">
     <a href="/investments">Investments</a>
   </div>
-  <div class="col-sm-1">
+  <div class="col-sm-1 ">
     <a href="/charts">Charts</a>
   </div>
   <div class="col-sm-2">
@@ -22,17 +22,16 @@
 </div>
 
 
-<form  name="chartsForm" class="form-horizontal col-xs-12 col-md-6 col-md-offset-3 well"
-ng-submit="charts.chartData()">
+
+
+<form  name="chartsForm" class="form-inline col-sm-6 col-sm-offset-3  well" ng-submit="charts.chartData()">
   <div class="form-group row">
-    <label class="control-label col-xs-offset-1 col-xs-2">Transaction Period:</label>
-    <div class="col-xs-8">
+    <label class="control-label col-sm-3">Transaction Period:</label>
+    <div class="col-sm-6">
       <select class="form-control" ng-model="charts.monthyear" ng-init="charts.monthYearlist[0].month "
       ng-options="{month:x.month,year:x.year} as (x.month+','+x.year) for x in charts.monthYearlist"></select>
     </div>
-  </div>
-  <div class="form-group row ">
-  <div class="col-sm-6">
+  <div class="col-sm-3">
     <button type="submit" class="btn  btn-sm btn-primary" >Submit</button>
   </div>
   </div>
@@ -43,7 +42,7 @@ ng-submit="charts.chartData()">
   chart-data="charts.data" chart-labels="charts.labels">
 </canvas>
 
-<div id="details">
+<div id="chartdetails" class="center-block text-center" class="table-responsive">
     <h4>Transaction period : {{charts.displaydata.month}},{{charts.displaydata.year}} </h4>
     <table  class="table table-striped text-center table-condensed " id="table_id">
       <thead>
