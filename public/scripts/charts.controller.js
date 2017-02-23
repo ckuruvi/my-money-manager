@@ -32,7 +32,16 @@ ChartsService.getMonthYearList().then(function(list){
       var totalSavings=parseInt(obj.income)-(parseInt(obj.expense)+parseInt(obj.investment));
       ctrl.labels=['saving','expense','investment'];
       ctrl.data=[totalSavings,obj.expense,obj.investment];
-      ctrl.options={ legend: { display: true } };
+      ctrl.options={ legend:
+                        { display: true,
+                          labels: {
+                              fontFamily:'Satisfy'
+                                }
+                      },
+                    tooltips:{
+                      titleFontFamily:'Satisfy',
+                      bodyFontFamily:'Satisfy'
+                    }};
       console.log(obj);
       console.log(ctrl.labels,ctrl.data);
      });

@@ -51,7 +51,34 @@ ctrl.chartData=function(){
     ctrl.labels=labels;
     ctrl.data=[income,expense];
     ctrl.series = ['Income', 'Expense'];
-    ctrl.options={ legend: { display: true } };
+    ctrl.options={ legend: { display: true,
+                            labels: {
+                                fontFamily:'Satisfy'
+                              }
+                            },
+                  scales:{
+                    xAxes: [{
+                      gridLines: {
+                        display: false
+                        },
+                        ticks: {
+                          fontFamily:'Satisfy',
+                        }
+                      }],
+                      yAxes: [{
+                        gridLines: {
+                          display: false
+                          },
+                          ticks: {
+                            fontFamily:'Satisfy',
+                          }
+                        }]
+                      },
+                      tooltips:{
+                        titleFontFamily:'Satisfy',
+                        bodyFontFamily:'Satisfy'
+                      }
+                };
     //console.log(labels,income,expense);
   });
 }

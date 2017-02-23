@@ -1,6 +1,12 @@
 /* styles */
 body{
   border: solid 1px;
+  font-family: 'Satisfy', cursive;
+}
+
+form{
+  width:700px;
+  margin:auto;
 }
 
 canvas{
@@ -10,8 +16,17 @@ canvas{
 
 #expenseHistory{ width:700px;}
 #incomeHistory{ width:700px;}
-#expenseHistory{ width:700px;}
-#transactionHistory{ width:700px;}
+#transactionHistory{width:700px;}
 #chartdetails{width:700px;}
+
 .bodycontainer { max-height: 300px; width: 100%; margin: 0; overflow-y: auto; }
 .table-scrollable { margin: 0; padding: 0; }
+
+#chartDropDown{
+  width:90px;
+  margin-left: 30px;
+}
+
+#linechart{
+  margin-top: 20px
+}

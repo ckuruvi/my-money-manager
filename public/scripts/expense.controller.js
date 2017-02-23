@@ -4,6 +4,7 @@ console.log("ExpenseController Loaded");
 var ctrl=this;
 
 
+
 ctrl.expenseList=function(){
  console.log('inside expenseList');
  ExpenseService.getExpenseList().then(function(data){
@@ -17,6 +18,8 @@ ctrl.expenseCategoryList=function(){
    ctrl.categoryList=list;
  });
 }; //end of expenseCategoryList
+
+
 
 ctrl.expenseList();
 ctrl.expenseCategoryList();
