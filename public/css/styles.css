@@ -1,6 +1,5 @@
 /* styles */
 body{
-  /*border: solid 1px;*/
   font-family: 'Satisfy', cursive;
 }
 
@@ -14,19 +13,35 @@ canvas{
   width:500px  !important ;
 }
 
-#expenseHistory{ width:700px;}
-#incomeHistory{ width:700px;}
-#transactionHistory{width:700px;}
-#chartdetails{width:700px;}
-
-.bodycontainer { max-height: 300px; width: 100%; margin: 0; overflow-y: auto; }
-.table-scrollable { margin: 0; padding: 0; }
-
-#chartDropDown{
-  width:90px;
-  margin-left: 30px;
+#expenseHistory{
+  width:700px;
+}
+#incomeHistory{
+  width:700px;
+}
+#transactionHistory{
+  width:700px;
+}
+#chartdetails{
+  width:700px;
 }
 
-#linechart{
-  margin-top: 20px;
+.bodycontainer{
+  max-height: 300px;
+  width: 100%;
+  margin: 0;
+  overflow-y: auto;
 }
+
+.table-scrollable{
+  margin: 0;
+  padding: 0; }
+
+  #chartDropDown{
+    width:90px;
+    margin-left: 30px;
+  }
+
+  #linechart{
+    margin-top: 20px;
+  }
