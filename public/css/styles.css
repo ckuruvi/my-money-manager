@@ -1,6 +1,6 @@
 /* styles */
 body{
-  border: solid 1px;
+  /*border: solid 1px;*/
   font-family: 'Satisfy', cursive;
 }
 
@@ -28,5 +28,5 @@ canvas{
 }
 
 #linechart{
-  margin-top: 20px
+  margin-top: 20px;
 }

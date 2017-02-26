@@ -1,7 +1,4 @@
 
-
-<h2>income</h2>
-
 <div class="row text-center ">
   <div class="col-sm-1 col-sm-offset-2 ">
     <a href="/home">Home</a>
@@ -22,9 +19,6 @@
     <button class="btn btn-info btn-xs" ng-click="income.logout()" >Logout</button>
   </div>
 </div>
-
-
-
 
 <form  name="incomeForm" class="form-horizontal col-xs-12 col-md-6 col-md-offset-3 well"
 ng-submit="income.saveIncome(income.formdata)">
@@ -47,42 +41,40 @@ ng-submit="income.saveIncome(income.formdata)">
   <input class="form-control" type="number" ng-model="income.formdata.amount">
 </div>
 </div>
-  <div class="form-group row">
-    <label class="control-label col-xs-offset-1 col-xs-2">Date:</label>
-    <div class="col-xs-8">
-      <input class="form-control" type="date" ng-model="income.formdata.dateSelected">
-    </div>
+<div class="form-group row">
+  <label class="control-label col-xs-offset-1 col-xs-2">Date:</label>
+  <div class="col-xs-8">
+    <input class="form-control" type="date" ng-model="income.formdata.dateSelected">
   </div>
-  <div class="form-group row ">
+</div>
+<div class="form-group row ">
   <div class="col-sm-4 col-sm-offset-3">
     <button type="submit" class="btn  btn-sm btn-primary" >Add Income</button>
   </div>
   <div class="col-sm-3 center-block">
     <button type="submit" class="btn btn-sm btn-primary" ng-click="income.reset()" >Cancel</button>
   </div>
-  </div>
+</div>
 </form>
 
-
 <div id="incomeHistory" class="center-block text-center" class="table-responsive">
-
   <div class="row">
-      <div class="col-sm-6 col-sm-offset-3">
+    <div class="col-sm-6 col-sm-offset-3">
     <h4>Income History</h4>
   </div>
-</div>
-    <table  class="table table-striped text-center " id="table_id">
-      <thead>
-        <tr class="active">
-          <th class="text-center">Description</th>
-          <th class="text-center">Category</th>
-          <th class="text-center">Amount</th>
-          <th class="text-center">Date</th>
-          <th class="text-center">Delete</th>
-        </tr>
-      </thead>
-    </table>
-    <div class="bodycontainer scrollable">
+ </div>
+ <table  class="table table-striped text-center " id="table_id">
+  <thead>
+    <tr class = "success">
+      <th class="text-center">Description</th>
+      <th class="text-center">Category</th>
+      <th class="text-center">Amount</th>
+      <th class="text-center">Date</th>
+      <th class="text-center">Delete</th>
+    </tr>
+  </thead>
+</table>
+  <div class="bodycontainer scrollable">
     <table class="table table-striped table-condensed table-scrollable text-center">
       <tbody >
         <tr ng-repeat=" obj in income.incomelist">
@@ -96,3 +88,4 @@ ng-submit="income.saveIncome(income.formdata)">
       </tBody>
     </table>
   </div>
+</div>

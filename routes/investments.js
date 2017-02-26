@@ -99,7 +99,7 @@ function updatePrice(list) {
       //console.log('*datalength*',JSON.parse(tickerPrice).dataset_data.data.length);
        if(tickerData.length>0){
       //  if(tickerPrice.dataset_data.data.length<0){
-       var purchaseAmt=obj.quantity * parseInt(obj.purchase_price);
+       var purchaseAmt=obj.quantity * Number(obj.purchase_price).toFixed(2);
        console.log("purchaseAmt",purchaseAmt,tickerData[0][4]);
        var currentAmt=obj.quantity * tickerData[0][4];
        //console.log("purchaseAmt & currentAmt ::",purchaseAmt,currentAmt);

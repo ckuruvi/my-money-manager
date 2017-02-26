@@ -2,10 +2,6 @@
 // angular
 //   .module("passportApp")
   myApp.config(function($routeProvider, $locationProvider,ChartJsProvider) {
-    $locationProvider.html5Mode(true);
-    ChartJsProvider.setOptions({
-      responsive: false
-    });
 
     $routeProvider
       .when("/home", {
@@ -36,6 +32,11 @@
       .otherwise({
         templateUrl: "views/login.html",
         controller: "LoginController as login"
+      });
+
+      $locationProvider.html5Mode(true);
+      ChartJsProvider.setOptions({
+        responsive: false
       });
   })
   // .config(['ChartJsProvider', function (ChartJsProvider) {

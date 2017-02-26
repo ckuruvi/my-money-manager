@@ -1,7 +1,5 @@
 
 
-<h2>Charts</h2>
-
 <div class="row text-center">
   <div class="col-sm-1 col-sm-offset-2 ">
     <a href="/home">Home</a>
@@ -23,25 +21,20 @@
   </div>
 </div>
 
-
-
-
 <form name="chartsForm" class="form-inline   well" ng-submit="charts.chartData()">
   <div class="row">
     <div class="col-sm-6 col-sm-offset-2">
-
-  <div class="form-group">
-    <label class="control-label ">Transaction Period:</label>
-      <select id="chartDropDown" class="form-control" ng-model="charts.monthyear" ng-init="charts.monthYearlist[0].month "
-      ng-options="{month:x.month,year:x.year} as (x.month+','+x.year) for x in charts.monthYearlist"></select>
+      <div class="form-group">
+        <label class="control-label ">Transaction Period:</label>
+        <select id="chartDropDown" class="form-control" ng-model="charts.monthyear" ng-init="charts.monthYearlist[0].month "
+        ng-options="{month:x.month,year:x.year} as (x.month+','+x.year) for x in charts.monthYearlist"></select>
+     </div>
     </div>
-      </div>
-        <div class="col-sm-2">
-    <button type="submit" class="btn  btn-sm btn-primary" >Submit</button>
-</div>
+    <div class="col-sm-2">
+      <button type="submit" class="btn  btn-sm btn-primary" >Submit</button>
+    </div>
   </div>
 </form>
-
 
 <canvas id="doughnut" class="chart chart-doughnut center-block" chart-options="charts.options"
   chart-data="charts.data" chart-labels="charts.labels">
@@ -65,7 +58,4 @@
         </tr>
       </tBody>
     </table>
-  </div>
-
-</body>
-</html>
+</div>
