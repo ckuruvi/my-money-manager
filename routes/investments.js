@@ -116,7 +116,6 @@ router.post('/', function(req, res){
   function getPriceByTicker(ticker,date){
     return rp('https://www.quandl.com/api/v3/datasets/WIKI/'+ticker+'/data.json?api_key=sK64LyybZ5dz3sg37-Ac&start_date='+date)
     .then(function (quotes) {
-      console.log('response from api call',quotes);
       return quotes;
     }).catch(function(err){
       console.log("error getting quote",err);

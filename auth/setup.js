@@ -9,13 +9,13 @@ passport.use("local", new LocalStrategy(
 
 // user -> userID
 passport.serializeUser(function(user, done) {
-  console.log("Serializing User");
+  //console.log("Serializing User");
   done(null, user.id);
 });
 
 // userID -> user
 passport.deserializeUser(function(id, done) {
-  console.log("Deserializing User");
+  //console.log("Deserializing User");
   User
     .findById(id)
     .then(function(user) {
@@ -28,7 +28,7 @@ passport.deserializeUser(function(id, done) {
 });
 
 function findAndComparePassword(username, password, done) {
-  console.log("Finding and comparing passwords");
+  //console.log("Finding and comparing passwords");
   User.findAndComparePassword(username, password).then(function(result){
     console.log('result', result);
     if (result.match) {
