@@ -1,6 +1,5 @@
 var pool = require("../db/connection");
 
-
 exports.getIncomeList=function(userId){
   return query(
     "SELECT 	to_char(income_date,'Mon') AS month, to_char(income_date,'YY') AS year,SUM(income_amount) AS income "+
@@ -9,9 +8,9 @@ exports.getIncomeList=function(userId){
   ).then(function(incomelist) {
     return incomelist;
   })
-.catch(function(err) {
-  console.log("Error getting income  list", err);
-});
+  .catch(function(err) {
+    console.log("Error getting income  list", err);
+  });
 }
 
 exports.getExpenseList=function(userId){
@@ -22,9 +21,9 @@ exports.getExpenseList=function(userId){
   ).then(function(expenselist) {
     return expenselist;
   })
-.catch(function(err) {
-  console.log("Error getting expense  list", err);
-});
+  .catch(function(err) {
+    console.log("Error getting expense  list", err);
+  });
 }
 
 exports.getTransactionList=function(userId){
@@ -39,10 +38,11 @@ exports.getTransactionList=function(userId){
   ).then(function(transactionslist) {
     return transactionslist;
   })
-.catch(function(err) {
-  console.log("Error getting expense  list", err);
-});
+  .catch(function(err) {
+    console.log("Error getting expense  list", err);
+  });
 }
+
 
 function query(sqlString, data) {
   return new Promise(function(resolve, reject) {

@@ -25,7 +25,6 @@ exports.createExpense=function(userid,category,amount,description,dateSelected){
 });
 };
 
-
 //get expense list
 exports.getExpenseList=function(userid){
   return query(
@@ -74,4 +73,3 @@ function query(sqlString, data) {
     });
   });
 }
-//

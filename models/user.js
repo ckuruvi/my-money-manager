@@ -5,23 +5,23 @@ var SALT_ROUNDS = 10;
 // find by username
 exports.findByUsername = function(username) {
   return query("SELECT * FROM users WHERE username = $1", [ username ])
-    .then(function(users) {
-      return users[0];
-    })
-    .catch(function(err) {
-      console.log("Error finding user by username", err);
-    });
+  .then(function(users) {
+    return users[0];
+  })
+  .catch(function(err) {
+    console.log("Error finding user by username", err);
+  });
 };
 
 // find by id
 exports.findById = function(id) {
   return query("SELECT * FROM users WHERE id = $1", [ id ])
-    .then(function(users) {
-      return users[0];
-    })
-    .catch(function(err) {
-      console.log("Error finding user by id", err);
-    });
+  .then(function(users) {
+    return users[0];
+  })
+  .catch(function(err) {
+    console.log("Error finding user by id", err);
+  });
 };
 
 // compare password
@@ -31,30 +31,30 @@ exports.findById = function(id) {
 exports.findAndComparePassword = function(username, password) {
   return exports.findByUsername(username).then(function(user) {
     return bcrypt
-      .compare(password, user.password)
-      .then(function(match) {
-        return { match: match, user: user };
-      })
-      .catch(function(err) {
-        return false;
-      });
+    .compare(password, user.password)
+    .then(function(match) {
+      return { match: match, user: user };
+    })
+    .catch(function(err) {
+      return false;
+    });
   });
 };
 
 exports.create = function(username, password, firstname, lastname) {
   return bcrypt
-    .hash(password, SALT_ROUNDS)
-    .then(function(hash) {
-      return query(
-        "INSERT INTO users (username, password,first_name,last_name) VALUES ($1, $2, $3, $4) RETURNING *",
-        [ username, hash,firstname,lastname ]
-      ).then(function(users) {
-        return users[0];
-      });
-    })
-    .catch(function(err) {
-      console.log("Error creating user", err);
+  .hash(password, SALT_ROUNDS)
+  .then(function(hash) {
+    return query(
+      "INSERT INTO users (username, password,first_name,last_name) VALUES ($1, $2, $3, $4) RETURNING *",
+      [ username, hash,firstname,lastname ]
+    ).then(function(users) {
+      return users[0];
     });
+  })
+  .catch(function(err) {
+    console.log("Error creating user", err);
+  });
 };
 
 exports.getIncomeCategoryList=function(){
@@ -63,9 +63,9 @@ exports.getIncomeCategoryList=function(){
   ).then(function(list) {
     return list;
   })
-.catch(function(err) {
-  console.log("Error getting Income category list", err);
-});
+  .catch(function(err) {
+    console.log("Error getting Income category list", err);
+  });
 }
 
 // create new income
@@ -77,9 +77,9 @@ exports.createIncome=function(userid,category,amount,description,dateSelected){
   ).then(function(income) {
     return income[0];
   })
-.catch(function(err) {
-  console.log("Error creating Income", err);
-});
+  .catch(function(err) {
+    console.log("Error creating Income", err);
+  });
 };
 
 
@@ -87,48 +87,29 @@ exports.createIncome=function(userid,category,amount,description,dateSelected){
 exports.getIncomeList=function(userid){
   return query(
     "SELECT u.id,income_category_name,income_amount,income_desc,income_date FROM  user_income u inner join"+
-     " income_category c on u.income_category_id=c.id and u.user_id=$1 order by income_date desc; ",
-     [userid]
+    " income_category c on u.income_category_id=c.id and u.user_id=$1 order by income_date desc; ",
+    [userid]
   ).then(function(list) {
     return list;
   })
-.catch(function(err) {
-  console.log("Error getting Income List", err);
-});
+  .catch(function(err) {
+    console.log("Error getting Income List", err);
+  });
 }
 
 // delete income
 exports.deleteIncome = function(id) {
-      return query(
-        "DELETE from user_income where id=$1 RETURNING *",
-        [ id ]
-      ).then(function(users) {
-        return users[0];
-      })
-    .catch(function(err) {
-      console.log("Error deleting  income", err);
-    });
+  return query(
+    "DELETE from user_income where id=$1 RETURNING *",
+    [ id ]
+  ).then(function(users) {
+    return users[0];
+  })
+  .catch(function(err) {
+    console.log("Error deleting  income", err);
+  });
 };
 
-// exports.create('test', '1234').then(function() {
-//   console.log('Created a test user');
-// });
-// exports.findByUsername('test').then(function(user){
-//   console.log(user);
-// })
-// exports.findById('2').then(function(user){
-//   console.log(user);
-// });
-// exports.findAndComparePassword("test", "12345").then(function(match) {
-//   console.log("Passwords match", match);
-// });
-// query("SELECT * FROM users")
-//   .then(function(result) {
-//     console.log(result.rows);
-//   })
-//   .catch(function(err) {
-//     console.log("Error running test query", err);
-//   });
 function query(sqlString, data) {
   return new Promise(function(resolve, reject) {
     pool.connect(function(err, client, done) {
