@@ -29,7 +29,7 @@ exports.createExpense=function(userid,category,amount,description,dateSelected){
 exports.getExpenseList=function(userid){
   return query(
     "SELECT u.id,expense_category_name,expense_amount,expense_desc,expense_date FROM  user_expense u inner join"+
-     " expense_category c on u.expense_category_id=c.id and u.user_id=$1 ; ",
+     " expense_category c on u.expense_category_id=c.id and u.user_id=$1 order by expense_date desc; ",
      [userid]
   ).then(function(list) {
     return list;

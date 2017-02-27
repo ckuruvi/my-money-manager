@@ -3,7 +3,7 @@ var CONSTANT_VAL=0;
 
 exports.getinvestmentList=function(id){
   return query(
-    "SELECT * FROM  user_holding where user_id=$1; ",
+    "SELECT * FROM  user_holding where user_id=$1 order by purchase_date desc; ",
     [id]
   ).then(function(list) {
     return list;
