@@ -20,14 +20,14 @@ connection.connect();
 var app = express();
 
 var sessionConfig = {
-  secret: process.env.SECRET || 'super secret key goes here',
-  key: 'user',
-  resave: true,
-  saveUninitialized: true,
-  cookie: {
-    maxAge: 30 * 60 * 1000, // 30 minutes
-    secure: false
-  }
+    secret: process.env.SECRET || 'super secret key goes here',
+    key: 'user',
+    resave: true,
+    saveUninitialized: true,
+    cookie: {
+        maxAge: 30 * 60 * 1000, // 30 minutes
+        secure: false
+    }
 }
 
 app.use(session(sessionConfig));
@@ -45,31 +45,31 @@ app.use('/investments', investments);
 app.use('/home', home);
 app.use('/charts', charts);
 
-app.get('/loginStatus', function(req, res){
-  res.send(req.isAuthenticated());
+app.get('/loginStatus', function(req, res) {
+    res.send(req.isAuthenticated());
 })
 
 // the following routes require authentication
 app.use('/private', ensureAuthenticated);
 
-app.get('/private/secretInfo', function(req, res){
-  console.log('Sending secret info');
-  res.send('This is very secret!');
+app.get('/private/secretInfo', function(req, res) {
+    console.log('Sending secret info');
+    res.send('This is very secret!');
 });
 
 function ensureAuthenticated(req, res, next) {
-  console.log('Ensuring the user is authenticated');
-  if (req.isAuthenticated()) {
-    next();
-  } else {
-    res.sendStatus(401);
-  }
+    console.log('Ensuring the user is authenticated');
+    if (req.isAuthenticated()) {
+        next();
+    } else {
+        res.sendStatus(401);
+    }
 }
 
-app.get('/*', function(req, res){
-  res.sendFile(path.join(__dirname, 'public/views/index.html'));
+app.get('/*', function(req, res) {
+    res.sendFile(path.join(__dirname, 'public/views/index.html'));
 });
 
 var server = app.listen(3000, function() {
-  console.log('Listening on port', server.address().port);
+    console.log('Listening on port', server.address().port);
 });

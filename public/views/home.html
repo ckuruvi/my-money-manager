@@ -1,48 +1,45 @@
-
-    <div class="row text-center ">
-      <div class="col-sm-1 col-sm-offset-2">
+<div class="row text-center ">
+    <div class="col-sm-1 col-sm-offset-2">
         <a href="/home">Home</a>
-      </div>
-      <div class="col-sm-1">
-        <a href="/income">Income</a>
-      </div>
-      <div class="col-sm-1">
-        <a href="/expense">Expenses</a>
-      </div>
-      <div class="col-sm-2">
-        <a href="/investments">Investments</a>
-      </div>
-      <div class="col-sm-1">
-        <a href="/charts">Charts</a>
-      </div>
-      <div class="col-sm-2">
-        <button class="btn btn-info btn-xs" ng-click="home.logout()" >Logout</button>
-      </div>
     </div>
+    <div class="col-sm-1">
+        <a href="/income">Income</a>
+    </div>
+    <div class="col-sm-1">
+        <a href="/expense">Expenses</a>
+    </div>
+    <div class="col-sm-2">
+        <a href="/investments">Investments</a>
+    </div>
+    <div class="col-sm-1">
+        <a href="/charts">Charts</a>
+    </div>
+    <div class="col-sm-2">
+        <button class="btn btn-info btn-xs" ng-click="home.logout()">Logout</button>
+    </div>
+</div>
 
-  <canvas id="linechart" class="chart chart-line center-block" chart-data="home.data"
-      chart-labels="home.labels" chart-series="home.series" chart-options="home.options"
-      chart-dataset-override="home.datasetOverride" chart-click="onClick">
+<canvas id="linechart" class="chart chart-line center-block" chart-data="home.data" chart-labels="home.labels" chart-series="home.series" chart-options="home.options" chart-dataset-override="home.datasetOverride" chart-click="onClick">
   </canvas>
 
-  <div id="transactionHistory" class="center-block text-center" class="table-responsive">
-      <h4>Last Five Transactions</h4>
-      <table  class="table table-striped text-center table-condensed " id="table_id">
+<div id="transactionHistory" class="center-block text-center" class="table-responsive">
+    <h4>Last Five Transactions</h4>
+    <table class="table table-striped text-center table-condensed " id="table_id">
         <thead>
-          <tr class="active">
-            <th class="text-center">Name</th>
-            <th class="text-center">Type</th>
-            <th class="text-center">Amount</th>
-            <th class="text-center">Transaction Date</th>
-          </tr>
+            <tr class="active">
+                <th class="text-center">Name</th>
+                <th class="text-center">Type</th>
+                <th class="text-center">Amount</th>
+                <th class="text-center">Transaction Date</th>
+            </tr>
         </thead>
         <tbody>
-          <tr ng-repeat=" obj in home.transactionlist">
-            <td>{{obj.desc}}</td>
-            <td>{{obj.type}}</td>
-            <td>{{obj.amount}}</td>
-            <td>{{obj.tran_date|date:'MM-dd-yyyy'}}</td>
+            <tr ng-repeat=" obj in home.transactionlist">
+                <td>{{obj.desc}}</td>
+                <td>{{obj.type}}</td>
+                <td>{{obj.amount}}</td>
+                <td>{{obj.tran_date|date:'MM-dd-yyyy'}}</td>
             </tr>
         </tBody>
-      </table>
-  </div>
+    </table>
+</div>

@@ -1,61 +1,57 @@
-
-
 <div class="row text-center">
-  <div class="col-sm-1 col-sm-offset-2 ">
-    <a href="/home">Home</a>
-  </div>
-  <div class="col-sm-1">
-    <a href="/income">Income</a>
-  </div>
-  <div class="col-sm-1">
-    <a href="/expense">Expenses</a>
-  </div>
-  <div class="col-sm-2">
-    <a href="/investments">Investments</a>
-  </div>
-  <div class="col-sm-1 ">
-    <a href="/charts">Charts</a>
-  </div>
-  <div class="col-sm-2">
-    <button class="btn btn-info btn-xs" ng-click="charts.logout()" >Logout</button>
-  </div>
+    <div class="col-sm-1 col-sm-offset-2 ">
+        <a href="/home">Home</a>
+    </div>
+    <div class="col-sm-1">
+        <a href="/income">Income</a>
+    </div>
+    <div class="col-sm-1">
+        <a href="/expense">Expenses</a>
+    </div>
+    <div class="col-sm-2">
+        <a href="/investments">Investments</a>
+    </div>
+    <div class="col-sm-1 ">
+        <a href="/charts">Charts</a>
+    </div>
+    <div class="col-sm-2">
+        <button class="btn btn-info btn-xs" ng-click="charts.logout()">Logout</button>
+    </div>
 </div>
 
 <form name="chartsForm" class="form-inline   well" ng-submit="charts.chartData()">
-  <div class="row">
-    <div class="col-sm-6 col-sm-offset-2">
-      <div class="form-group">
-        <label class="control-label ">Transaction Period:</label>
-        <select id="chartDropDown" class="form-control" ng-model="charts.monthyear" ng-init="charts.monthYearlist[0].month "
-        ng-options="{month:x.month,year:x.year} as (x.month+','+x.year) for x in charts.monthYearlist"></select>
-     </div>
+    <div class="row">
+        <div class="col-sm-6 col-sm-offset-2">
+            <div class="form-group">
+                <label class="control-label ">Transaction Period:</label>
+                <select id="chartDropDown" class="form-control" ng-model="charts.monthyear" ng-init="charts.monthYearlist[0].month " ng-options="{month:x.month,year:x.year} as (x.month+','+x.year) for x in charts.monthYearlist"></select>
+            </div>
+        </div>
+        <div class="col-sm-2">
+            <button type="submit" class="btn  btn-sm btn-primary">Submit</button>
+        </div>
     </div>
-    <div class="col-sm-2">
-      <button type="submit" class="btn  btn-sm btn-primary" >Submit</button>
-    </div>
-  </div>
 </form>
 
-<canvas id="doughnut" class="chart chart-doughnut center-block" chart-options="charts.options"
-  chart-data="charts.data" chart-labels="charts.labels">
+<canvas id="doughnut" class="chart chart-doughnut center-block" chart-options="charts.options" chart-data="charts.data" chart-labels="charts.labels">
 </canvas>
 
 <div id="chartdetails" class="center-block text-center" class="table-responsive">
     <h4>Transaction period : {{charts.displaydata.month}},{{charts.displaydata.year}} </h4>
-    <table  class="table table-striped text-center table-condensed " id="table_id">
-      <thead>
-        <tr class="active">
-          <th class="text-center">Income</th>
-          <th class="text-center">Expenses</th>
-          <th class="text-center">Investments</th>
-        </tr>
-      </thead>
-      <tbody id="text-center">
-        <tr >
-          <td>{{charts.displaydata.income}}</td>
-          <td>{{charts.displaydata.expense}}</td>
-          <td>{{charts.displaydata.investment}}</td>
-        </tr>
-      </tBody>
+    <table class="table table-striped text-center table-condensed " id="table_id">
+        <thead>
+            <tr class="active">
+                <th class="text-center">Income</th>
+                <th class="text-center">Expenses</th>
+                <th class="text-center">Investments</th>
+            </tr>
+        </thead>
+        <tbody id="text-center">
+            <tr>
+                <td>{{charts.displaydata.income}}</td>
+                <td>{{charts.displaydata.expense}}</td>
+                <td>{{charts.displaydata.investment}}</td>
+            </tr>
+        </tBody>
     </table>
 </div>

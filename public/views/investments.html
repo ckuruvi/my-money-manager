@@ -1,103 +1,101 @@
 <!-- <h2>investments</h2> -->
 <div class="row text-center  ">
-  <div class="col-sm-1 col-sm-offset-2">
-    <a href="/home">Home</a>
-  </div>
-  <div class="col-sm-1">
-    <a href="/income">Income</a>
-  </div>
-  <div class="col-sm-1">
-    <a href="/expense">Expenses</a>
-  </div>
-  <div class="col-sm-2">
-    <a href="/investments">Investments</a>
-  </div>
-  <div class="col-sm-1">
-    <a href="/charts">Charts</a>
-  </div>
-  <div class="col-sm-2">
-    <button class="btn btn-info btn-xs" ng-click="invest.logout()" >Logout</button>
-  </div>
+    <div class="col-sm-1 col-sm-offset-2">
+        <a href="/home">Home</a>
+    </div>
+    <div class="col-sm-1">
+        <a href="/income">Income</a>
+    </div>
+    <div class="col-sm-1">
+        <a href="/expense">Expenses</a>
+    </div>
+    <div class="col-sm-2">
+        <a href="/investments">Investments</a>
+    </div>
+    <div class="col-sm-1">
+        <a href="/charts">Charts</a>
+    </div>
+    <div class="col-sm-2">
+        <button class="btn btn-info btn-xs" ng-click="invest.logout()">Logout</button>
+    </div>
 </div>
 
-<form  name="investForm" class="form-horizontal col-xs-12 col-md-6 col-md-offset-3 well">
-  <div class="form-group row">
-    <label class="control-label col-xs-offset-1 col-xs-2">Ticker Symbol:</label>
-    <div class="col-xs-6">
-    <input class="form-control" type="text" ng-model="invest.formdata.ticker">
-    </div>
-    <div class="col-xs-2">
-      <button type="submit" class="btn  btn-sm btn-primary"
-       ng-click="invest.searchTicker(invest.formdata.ticker)">Search</button>
-    </div>
-  </div>
+<form name="investForm" class="form-horizontal col-xs-12 col-md-6 col-md-offset-3 well">
     <div class="form-group row">
-  <label class="control-label col-xs-offset-1 col-xs-2">Name:</label>
-  <div class="col-xs-8">
-    <input class="form-control" type="text" ng-model="invest.formdata.name">
-  </div>
-</div>
-  <div class="form-group row">
-<label class="control-label col-xs-offset-1 col-xs-2">Price:</label>
-<div class="col-xs-8">
-  <input class="form-control" type="number" step='any' ng-model="invest.formdata.price">
-</div>
-</div>
-  <div class="form-group row">
-  <label class="control-label col-xs-offset-1 col-xs-2">Quantity:</label>
-  <div class="col-xs-8">
-    <input class="form-control" type="number" ng-model="invest.formdata.quantity">
-  </div>
-  </div>
-  <div class="form-group row">
-    <label class="control-label col-xs-offset-1 col-xs-2">Purchase Date:</label>
-    <div class="col-xs-8">
-      <input class="form-control" type="date" ng-model="invest.formdata.purchasedate">
+        <label class="control-label col-xs-offset-1 col-xs-2">Ticker Symbol:</label>
+        <div class="col-xs-6">
+            <input class="form-control" type="text" ng-model="invest.formdata.ticker">
+        </div>
+        <div class="col-xs-2">
+            <button type="submit" class="btn  btn-sm btn-primary" ng-click="invest.searchTicker(invest.formdata.ticker)">Search</button>
+        </div>
     </div>
-  </div>
-  <div class="form-group row ">
-  <div class="col-sm-4 col-sm-offset-3" >
-    <button type="submit" ng-click="invest.saveInvestment(invest.formdata)" class="btn  btn-sm btn-primary" >Submit</button>
-  </div>
-  <div class="col-sm-3 center-block">
-    <button type="submit" class="btn btn-sm btn-primary" ng-click="invest.reset()" >Cancel</button>
-  </div>
-  </div>
+    <div class="form-group row">
+        <label class="control-label col-xs-offset-1 col-xs-2">Name:</label>
+        <div class="col-xs-8">
+            <input class="form-control" type="text" ng-model="invest.formdata.name">
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="control-label col-xs-offset-1 col-xs-2">Price:</label>
+        <div class="col-xs-8">
+            <input class="form-control" type="number" step='any' ng-model="invest.formdata.price">
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="control-label col-xs-offset-1 col-xs-2">Quantity:</label>
+        <div class="col-xs-8">
+            <input class="form-control" type="number" ng-model="invest.formdata.quantity">
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="control-label col-xs-offset-1 col-xs-2">Purchase Date:</label>
+        <div class="col-xs-8">
+            <input class="form-control" type="date" ng-model="invest.formdata.purchasedate">
+        </div>
+    </div>
+    <div class="form-group row ">
+        <div class="col-sm-4 col-sm-offset-3">
+            <button type="submit" ng-click="invest.saveInvestment(invest.formdata)" class="btn  btn-sm btn-primary">Submit</button>
+        </div>
+        <div class="col-sm-3 center-block">
+            <button type="submit" class="btn btn-sm btn-primary" ng-click="invest.reset()">Cancel</button>
+        </div>
+    </div>
 </form>
 <div id="expenseHistory" class="center-block text-center" class="table-responsive">
-  <div class="row">
-    <div class="col-sm-6 col-sm-offset-3">
-      <h4>Investment History</h4>
-  </div>
-  <div class="col-sm-2 btn-sm">
-    <button type="submit" class="btn btn-sm btn-primary" ng-click="invest.updatePrice()" >Update Price</button>
-  </div>
-  </div>
-  <table  class="table table-striped text-center table-condensed " id="table_id">
-    <thead>
-      <tr class="active">
-        <th class="text-center">Name</th>
-        <th class="text-center">Quantity</th>
-        <th class="text-center">Purchase Price</th>
-        <th class="text-center">Purchase Date</th>
-        <th class="text-center">Current Price</th>
-        <th class="text-center">Profit/Loss</th>
-        <th class="text-center">Sell</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr ng-repeat=" obj in invest.investmentlist">
-        <td>{{obj.name}}</td>
-        <td>
-          <input class="input-xs" type="number" style="width:40px" ng-init="old_quantity=obj.quantity" ng-model="obj.quantity">
-        </td>
-        <td>{{obj.purchase_price}}</td>
-        <td>{{obj.purchase_date|date:'MM-dd-yyyy'}}</td>
-        <td>{{obj.current_price}}</td>
-        <td>{{obj.current_profit}}</td>
-        <td><button  class="btn btn-xs btn-info" ng-click="invest.sellInvestment(old_quantity,obj)"
-            type="submit" >Sell</button></td>
-      </tr>
-    </tBody>
-  </table>
+    <div class="row">
+        <div class="col-sm-6 col-sm-offset-3">
+            <h4>Investment History</h4>
+        </div>
+        <div class="col-sm-2 btn-sm">
+            <button type="submit" class="btn btn-sm btn-primary" ng-click="invest.updatePrice()">Update Price</button>
+        </div>
+    </div>
+    <table class="table table-striped text-center table-condensed " id="table_id">
+        <thead>
+            <tr class="active">
+                <th class="text-center">Name</th>
+                <th class="text-center">Quantity</th>
+                <th class="text-center">Purchase Price</th>
+                <th class="text-center">Purchase Date</th>
+                <th class="text-center">Current Price</th>
+                <th class="text-center">Profit/Loss</th>
+                <th class="text-center">Sell</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat=" obj in invest.investmentlist">
+                <td>{{obj.name}}</td>
+                <td>
+                    <input class="input-xs" type="number" style="width:40px" ng-init="old_quantity=obj.quantity" ng-model="obj.quantity">
+                </td>
+                <td>{{obj.purchase_price}}</td>
+                <td>{{obj.purchase_date|date:'MM-dd-yyyy'}}</td>
+                <td>{{obj.current_price}}</td>
+                <td>{{obj.current_profit}}</td>
+                <td><button class="btn btn-xs btn-info" ng-click="invest.sellInvestment(old_quantity,obj)" type="submit">Sell</button></td>
+            </tr>
+        </tBody>
+    </table>
 </div>
