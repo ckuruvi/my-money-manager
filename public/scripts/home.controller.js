@@ -16,9 +16,9 @@ myApp.controller('HomeController', function($http, $location, HomeService) {
                 income = [],
                 expense = [];
             chartList.forEach(function(obj) {
-                labels.push(obj.month);
-                expense.push(obj.expense);
-                income.push(obj.income);
+                labels.unshift(monthNames[parseInt(obj.month) - 1]);
+                expense.unshift(obj.expense);
+                income.unshift(obj.income);
             });
             ctrl.labels = labels;
             ctrl.data = [income, expense];
@@ -56,6 +56,7 @@ myApp.controller('HomeController', function($http, $location, HomeService) {
         });
     } // end of chartData function
 
+    var monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sept", "Oct", "Nov", "Dec"];
     ctrl.transactionList = function() {
         HomeService.getTransactionList().then(function(list) {
             ctrl.transactionlist = list;

@@ -2,8 +2,8 @@ var pool = require("../db/connection");
 
 exports.getIncomeList = function(userId) {
     return query(
-            "SELECT 	to_char(income_date,'Mon') AS month, to_char(income_date,'YY') AS year,SUM(income_amount) AS income " +
-            "from 	user_income where user_id=$1 group by 2,1 order by 2 asc,1 desc limit 6;", [userId]
+            "SELECT 	to_char(income_date,'MM') AS month, to_char(income_date,'YY') AS year,SUM(income_amount) AS income " +
+            "from 	user_income where user_id=$1 group by 2,1 order by 2 desc,1 desc limit 6;", [userId]
         ).then(function(incomelist) {
             return incomelist;
         })
@@ -14,8 +14,8 @@ exports.getIncomeList = function(userId) {
 
 exports.getExpenseList = function(userId) {
     return query(
-            "SELECT 	to_char(expense_date,'Mon') AS month, to_char(expense_date,'YY') AS year,SUM(expense_amount) AS expense " +
-            "from user_expense where user_id=$1 group by 2,1 order by 2 asc,1 desc limit 6;", [userId]
+            "SELECT 	to_char(expense_date,'MM') AS month, to_char(expense_date,'YY') AS year,SUM(expense_amount) AS expense " +
+            "from user_expense where user_id=$1 group by 2,1 order by 2 desc,1 desc limit 6;", [userId]
         ).then(function(expenselist) {
             return expenselist;
         })
